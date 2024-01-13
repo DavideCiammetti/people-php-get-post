@@ -36,6 +36,7 @@
             'surname'=>  $newSurname,
             'age'=>  $newAge,
             'gender'=> $newGender,
+            'show'=> false,
         ];
 
         $people[] = $newData;

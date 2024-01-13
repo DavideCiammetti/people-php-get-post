@@ -3,15 +3,18 @@ const { createApp } = Vue;
 createApp({
   data() {
     return {
-      data: [],
-      show: false,
+      // collegamento api php
       apiUrl: './script.php',
+      // oggetti get
+      data: [],
       allData: null,
-      // ogetti post
+      // oggetti post
       nName:'', 
       nSurname:'',
       nAge:'', 
       nGender:'',
+      // mostra button
+      show: false,
     };
   },
 
@@ -29,7 +32,7 @@ createApp({
           console.log(this.allData);
         });
       },
-
+      // chiamata post
       postAllData(){
         const param = {
           create: 1,
@@ -42,7 +45,18 @@ createApp({
           headers:{
             'Content-Type': 'multipart/form-data',
           },
-         }).then((response)=>console.log(response));
+         }).then((response)=>{
+          this.data = response.data;
+          console.log(this.data);
+         });
+      },
+      showButton(index){
+        this.data.forEach((element, i) => {
+            if(index === i){
+              element.show = !element.show;
+              return element.show;
+            }
+        });
       },
   },
 
