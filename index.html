@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+    <!-- /google font -->
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -11,46 +16,63 @@
     <div id="app" v-cloak>
         <main>
             <h1>New Person</h1>
-        <div>
-            <ul>
+            <!-- container lista -->
+        <div class=" container-list">
+            <ul class="d-flex">
                 <!-- lista persona -->
                 <li v-for="(dati, index) in data">
                   <div class="d-flex">
                     <div @click="showButton(index)">
-                        <p>{{dati.name}},</p>
+                        <p class="mr-4">{{dati.name}}</p>
                         <p>{{dati.nName}}</p>
                     </div>
-                    <div v-show="dati.show">
-                        <button type="button" @click="getAllData(index)">show <span>{{dati.name}}</span></button>
-                      </div>
                   </div>
                 </li>
                 <!-- /lista persona -->
             </ul>
-            <!-- dati completi da mostrare al click -->
-            <div v-if="allData">
+        </div>
+        <!-- /container lista -->
+        <div class="info-container">
+            <div v-for="(dati, index) in data">
+                <div v-show="dati.show">
+                    <button type="button" @click="getAllData(index)" class="info-button">show <span>{{dati.name}}</span></button>
+                </div>
+            </div>
+             <!-- dati completi da mostrare al click -->
+             <div v-if="allData">
                 <p>{{allData.surname}}, {{allData.age}}, {{allData.gender}}</p>
             </div>
         </div>
         <!-- form per prendere dati persona -->
-        <form  @submit.prevent="postAllData" methods="POST" name="create">
-            <div>
-                <label for="name">name</label>
-                <input type="text" name="nName" id="name" v-model="nName">
+        <form  @submit.prevent="postAllData" methods="POST" name="create" class="form">
+            <div class="input-container">
+                <!-- name surname -->
+                <div class="name-surname-container">
+                    <div>
+                        <label for="name" id="lab">name</label>
+                        <input type="text" name="nName" id="name" v-model="nName" placeholder="Name">
+                    </div>
+                    <div>
+                        <label for="surname" id="lab">surname</label>
+                        <input type="text" name="nSurname" id="surname" v-model="nSurname" placeholder="Surname">
+                    </div>
+                </div>
+                <!-- age gender -->
+                <div class="age-gender-container">
+                    <div>
+                        <label for="age" id="lab">age</label>
+                        <input type="number" name="nAge" id="age" v-model="nAge" placeholder="Age">
+                    </div>
+                    <div>
+                        <label for="gender" id="lab">gender</label>
+                        <input type="text" name="nGender" id="gender" v-model="nGender" placeholder="Gender">
+                    </div>
+                </div>
+                <!-- button -->
             </div>
-            <div>
-                <label for="surname">surname</label>
-                <input type="text" name="nSurname" id="surname" v-model="nSurname">
+            <div class="form-button">
+                <button type="submit">send</button>
             </div>
-            <div>
-                <label for="age">age</label>
-                <input type="number" name="nAge" id="age" v-model="nAge">
-            </div>
-            <div>
-                <label for="gender">gender</label>
-                <input type="text" name="nGender" id="gender" v-model="nGender">
-            </div>
-            <button type="submit">send</button>
         </form>
         </main>
     </div>
