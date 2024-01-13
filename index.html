@@ -35,12 +35,14 @@
         <div class="info-container">
             <div v-for="(dati, index) in data">
                 <div v-show="dati.show">
+                  <div>
                     <button type="button" @click="getAllData(index)" class="info-button">show <span>{{dati.name}}</span></button>
+                  </div>
                 </div>
             </div>
              <!-- dati completi da mostrare al click -->
              <div v-if="allData">
-                <p>{{allData.surname}}, {{allData.age}}, {{allData.gender}}</p>
+                <p v-show="showAllData">{{allData.surname}}, {{allData.age}}, {{allData.gender}}</p>
             </div>
         </div>
         <!-- form per prendere dati persona -->

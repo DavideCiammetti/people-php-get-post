@@ -8,13 +8,15 @@ createApp({
       // oggetti get
       data: [],
       allData: null,
+      showAllData: false,
       // oggetti post
       nName:'', 
       nSurname:'',
       nAge:'', 
       nGender:'',
       // mostra button
-      show: false,
+      showBut: true,
+
     };
   },
 
@@ -27,10 +29,11 @@ createApp({
       },
       // chiamata get per prendere e mostrare dati in base all'indice 
       getAllData(index){
-        axios.get(this.apiUrl, { params: { index } }).then((response) => {
-          this.allData = response.data;
-          console.log(this.allData);
-        });
+          axios.get(this.apiUrl, { params: { index } }).then((response) => {
+            this.allData = response.data;
+            this.showAllData = !this.showAllData;
+            console.log(this.allData);
+          });
       },
       // chiamata post
       postAllData(){
@@ -49,13 +52,24 @@ createApp({
           this.data = response.data;
           console.log(this.data);
          });
+
+         this.nName = '';
+         this.nSurname = '';
+         this.nAge = '';
+         this.nGender = '';
       },
+      // mostra button al click del nome
       showButton(index){
+        const curInd = [];
+        curInd.push(index); 
+        if(curInd.length > 1){
+          console.log('ciao');
+        }
         this.data.forEach((element, i) => {
-            if(index === i){
-              element.show = !element.show;
-              return element.show;
-            }
+              if(index === i){
+                element.show = !element.show;
+                return element.show;
+              }
         });
       },
   },
